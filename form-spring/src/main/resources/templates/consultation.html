@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>LIST OF BOOKS</title>
+</head>
+
+<body>
+	<h3>User: <span th:text="${user.name}"> </span> - Password: <span th:text="${user.password}"> </span></h3>
+
+	<H1>LIST OF BOOKS</H1>
+	<table border="1">
+		<thead>
+			<tr>
+				<th> Id
+				<th> Title
+				<th> Author
+				<th> Editorial
+				<th> Date
+				<th> Theme
+				<th> Delete
+				<th> Modify
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${books.empty}">
+				<td colspan="2"> No Books Available </td>
+			</tr>
+			<tr th:each="book : ${books}">
+				<td><span th:text="${book.id}"></span></td>
+				<td><span th:text="${book.title}"></span></td>
+				<td><span th:text="${book.author}"></span></td>
+				<td><span th:text="${book.editorial}"></span></td>
+				<td><span th:text="${book.date}"></span></td>
+				<td><span th:text="${book.theme}"></span></td>
+				<td><a href="@{/delete/}+${book.id}">Delete</a></td>
+				<td><a href="@{/modify/}+${book.id}">Modify</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<form th:action="${action}" method="post">
+		<br>ID : <input type="text" name="id" th:value="${book?.id}">
+		TITLE : <input type="text" name="title" th:value="${book?.title}">
+		AUTHOR : <input type="text" name="author" th:value="${book?.author}"><br>
+		EDITORIAL : <input type="text" name="editorial" th:value="${book?.editorial}">
+		DATE : <input type="text" name="date" th:value="${book?.date}">
+		THEME : <input type="text" name="theme" th:value="${book?.theme}"><br>
+		<input type="submit" name="submit" th:value="${button}">
+	</form>
+</body>
+
+</html>
